@@ -1,7 +1,7 @@
 include "alldifferent.mzn";
 
 % Una matriz del tablero
-array[0..6, 0..6] of var int: board;
+array[0..6, 0..6] of var 1..7: board;
 
 % Valores fijos del tablero
 constraint board[0,2] = 2;
@@ -17,10 +17,6 @@ constraint board[5,5] = 4;
 constraint board[6,2] = 1;
 constraint board[6,4] = 2;
 
-% Verifica que todos los valores sean del 1 al 7
-constraint forall(i in 0..6, j in 0..6) (
-           board[i,j] > 0 /\ board[i,j] < 8
-); 
 % Verifica que todas las filas y columnas tenga valores diferentes
 constraint forall(i in 0..6) (
            alldifferent([board[i,0], board[i,1], board[i,2], board[i,3], board[i,4], board[i,5], board[i,6]]) /\
