@@ -1,20 +1,22 @@
-include "alldifferent.mzn";
 
-var int: m;
-int: k;
-int: n;
-var int: x;
-var int: y;
-%array[1..2+k] of var int:ascensor;
-array[1..m,1..2+k] of var int: ascensores;
+% Problema 4
 
-% constraint forall(x in 1..n, y in 1..n) (
-%   exists(i in 1..m,j in 1..2+k) (ascensores[i,j] = x /\ ascensores[i,k] = y) 
-% ); 
+var 1..20: m; % Numero de ascensores
+int: k;       % Numero de pisos adicionales
+int: n;       % Numero de pisos totales
 
-constraint n=6;
-constraint k=3;
+array[1..20,1..n-2] of var bool: ascensores;  % Los pisos donde llega cada ascensor
 
-solve minimize m;
+constraint forall(x in 1..n-2, y in 1..n-2)(
+  exists(i in 1..m) (ascensores[i,x] /\ ascensores[i,y]) 
+); 
 
-output [show(m)]
+constraint forall(i in 1..m)(
+  k == sum (j in 1..n-2) (ascensores[i,j]) 
+);
+
+solve satisfy;
+
+output [show(ascensores[i,j]) ++ 
+        if j == n-2 then "\n" else " " endif |
+        i in 1..fix(m), j in 1..n-2];
