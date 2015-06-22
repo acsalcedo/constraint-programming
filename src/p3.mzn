@@ -29,4 +29,4 @@ solve minimize sol;
 % Imprimimos los términos y resultados
 output ["A: ", show(a), "\t B: ", show(b), "\t C: ", show(c), "\t D: ", show(d), "\t E: ",
         show(e), "\nF: ", show(f), "\t G: ", show(g), "\t H: ", show(h), "\t I: ", show(i), 
-        "\t I: ", show(j), "\n\n", "Resultado de la diferencia: ", show(first)," - ", show(second)," = ",show(sol)];
+        "\t J: ", show(j), "\n\n", "Resultado de la diferencia: ", show(first)," - ", show(second)," = ",show(sol)];
